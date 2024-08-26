@@ -431,11 +431,11 @@ const App = () => {
           </div>
         );
       })}
-      <div className="mt-2 flex flex-col items-center gap-2">
+      <div className="mb-5 mt-3 flex flex-col items-center gap-2 md:mb-0">
         <p className="flex items-center gap-2">
-          <span className="text-gray-500">Word: {word}</span>{" "}
+          {/* <span className="text-gray-500">Word: {word}</span>{" "} */}
           <button
-            className="rounded-md border border-black px-3 py-1"
+            className={`rounded-md border border-black px-3 py-1 ${won || loose ? "hidden" : "display-flex"}`}
             onClick={resetGame}
           >
             Reset
@@ -481,7 +481,7 @@ const Line = ({ guess, isFinal, word }) => {
 
     tiles.push(
       <div
-        className={`flex h-10 w-10 items-center justify-center border border-black text-lg font-medium uppercase ${bgColor}`}
+        className={`flex h-10 w-10 items-center justify-center rounded-sm border border-black text-lg font-medium uppercase ${bgColor}`}
         key={i}
       >
         {char}
@@ -518,6 +518,10 @@ const Keyboard = ({ word, guessedWords, currentGuess, setCurrentGuess }) => {
       // Simulate the Enter key press
       const enterEvent = new KeyboardEvent("keydown", { key: "Enter" });
       window.dispatchEvent(enterEvent);
+    } else if (key === "Backspace") {
+      // Simulate the Backspace key press
+      const backspaceEvent = new KeyboardEvent("keydown", { key: "Backspace" });
+      window.dispatchEvent(backspaceEvent);
     } else if (currentGuess.length < 5) {
       setCurrentGuess((prev) => prev + key);
     }
@@ -527,15 +531,15 @@ const Keyboard = ({ word, guessedWords, currentGuess, setCurrentGuess }) => {
     <div
       key={key}
       onClick={() => handleKeyClick(key)}
-      className={`mx-1 cursor-pointer rounded-md border border-black px-4 py-2 font-semibold text-black shadow-sm ${keyStatus[key] || ""}`}
+      className={`mx-1 cursor-pointer rounded-md border border-black px-2.5 py-1 font-semibold text-black shadow-sm md:px-4 md:py-2 ${keyStatus[key] || ""}`}
     >
       {key}
     </div>
   );
 
   return (
-    <div className="flex scale-75 flex-col items-center justify-center md:scale-90 lg:scale-100">
-      <div className="rounded-lg p-4">
+    <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center rounded-lg md:p-4">
         {/* First Row */}
         <div className="mb-2 flex">
           {["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"].map(renderKey)}
@@ -543,25 +547,27 @@ const Keyboard = ({ word, guessedWords, currentGuess, setCurrentGuess }) => {
 
         {/* Second Row */}
         <div className="mb-2 flex">
-          <div className="w-10"></div> {/* Offset for the first key */}
           {["A", "S", "D", "F", "G", "H", "J", "K", "L"].map(renderKey)}
         </div>
 
         {/* Third Row */}
-        <div className="flex">
-          <div className="mb-2 flex">
-            <div className="w-20"></div> {/* Offset for the first key */}
-            {["Z", "X", "C", "V", "B", "N", "M"].map(renderKey)}
-          </div>
+        <div className="mb-2 flex">
+          {["Z", "X", "C", "V", "B", "N", "M"].map(renderKey)}
+        </div>
 
-          {/* Fourth Row for Enter Key */}
-          <div className="">
-            <div
-              onClick={() => handleKeyClick("Enter")}
-              className="mx-1 cursor-pointer rounded-md border border-black bg-green-400 px-4 py-2 font-semibold text-black shadow-sm"
-            >
-              Enter
-            </div>
+        {/* Fourth Row for Backspace and Enter Keys */}
+        <div className="mt-2 flex justify-center">
+          <div
+            onClick={() => handleKeyClick("Backspace")}
+            className="mx-1 cursor-pointer rounded-md border border-black px-4 py-2 font-semibold text-black shadow-sm"
+          >
+            Backspace
+          </div>
+          <div
+            onClick={() => handleKeyClick("Enter")}
+            className="mx-1 cursor-pointer rounded-md border border-black px-4 py-2 font-semibold text-black shadow-sm"
+          >
+            Enter
           </div>
         </div>
       </div>
