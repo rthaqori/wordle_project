@@ -1,6 +1,347 @@
 import React, { useState, useEffect } from "react";
 
-const VALID_WORDS = ["raman", "arise", "stark", "tiger", "snake"];
+const VALID_WORDS = [
+  "ALBUM",
+  "HINGE",
+  "MONEY",
+  "SCRAP",
+  "GAMER",
+  "GLASS",
+  "SCOUR",
+  "BEING",
+  "DELVE",
+  "YIELD",
+  "METAL",
+  "TIPSY",
+  "SLUNG",
+  "FARCE",
+  "GECKO",
+  "SHINE",
+  "CANNY",
+  "MIDST",
+  "BADGE",
+  "HOMER",
+  "TRAIN",
+  "STORY",
+  "HAIRY",
+  "FORGO",
+  "LARVA",
+  "TRASH",
+  "ZESTY",
+  "SHOWN",
+  "HEIST",
+  "ASKEW",
+  "INERT",
+  "OLIVE",
+  "PLANT",
+  "OXIDE",
+  "CARGO",
+  "FOYER",
+  "FLAIR",
+  "AMPLE",
+  "CHEEK",
+  "SHAME",
+  "MINCE",
+  "CHUNK",
+  "ROYAL",
+  "SQUAD",
+  "BLACK",
+  "STAIR",
+  "SCARE",
+  "FORAY",
+  "COMMA",
+  "NATAL",
+  "SHAWL",
+  "FEWER",
+  "TROPE",
+  "SNOUT",
+  "LOWLY",
+  "STOVE",
+  "SHALL",
+  "FOUND",
+  "NYMPH",
+  "EPOXY",
+  "DEPOT",
+  "CHEST",
+  "PURGE",
+  "SLOSH",
+  "THEIR",
+  "RENEW",
+  "ALLOW",
+  "SAUTE",
+  "MOVIE",
+  "CATER",
+  "TEASE",
+  "SMELT",
+  "FOCUS",
+  "TODAY",
+  "WATCH",
+  "LAPSE",
+  "MONTH",
+  "SWEET",
+  "HOARD",
+  "CLOTH",
+  "BRINE",
+  "AHEAD",
+  "MOURN",
+  "NASTY",
+  "RUPEE",
+  "CHOKE",
+  "CHANT",
+  "SPILL",
+  "VIVID",
+  "BLOKE",
+  "TROVE",
+  "THORN",
+  "OTHER",
+  "TACIT",
+  "SWILL",
+  "DODGE",
+  "SHAKE",
+  "CAULK",
+  "AROMA",
+  "CYNIC",
+  "ROBIN",
+  "ULTRA",
+  "ULCER",
+  "PAUSE",
+  "HUMOR",
+  "FRAME",
+  "ELDER",
+  "SKILL",
+  "ALOFT",
+  "PLEAT",
+  "SHARD",
+  "MOIST",
+  "THOSE",
+  "LIGHT",
+  "WRUNG",
+  "COULD",
+  "PERKY",
+  "MOUNT",
+  "WHACK",
+  "SUGAR",
+  "KNOLL",
+  "CRIMP",
+  "WINCE",
+  "PRICK",
+  "ROBOT",
+  "POINT",
+  "PROXY",
+  "SHIRE",
+  "SOLAR",
+  "PANIC",
+  "TANGY",
+  "ABBEY",
+  "FAVOR",
+  "DRINK",
+  "QUERY",
+  "GORGE",
+  "CRANK",
+  "SLUMP",
+  "BANAL",
+  "TIGER",
+  "SIEGE",
+  "TRUSS",
+  "BOOST",
+  "REBUS",
+  "UNIFY",
+  "TROLL",
+  "TAPIR",
+  "ASIDE",
+  "FERRY",
+  "ACUTE",
+  "PICKY",
+  "WEARY",
+  "GRIPE",
+  "CRAZE",
+  "PLUCK",
+  "BRAKE",
+  "BATON",
+  "CHAMP",
+  "PEACH",
+  "USING",
+  "TRACE",
+  "VITAL",
+  "SONIC",
+  "MASSE",
+  "CONIC",
+  "VIRAL",
+  "RHINO",
+  "BREAK",
+  "TRIAD",
+  "EPOCH",
+  "USHER",
+  "EXULT",
+  "GRIME",
+  "CHEAT",
+  "SOLVE",
+  "BRING",
+  "PROVE",
+  "STORE",
+  "TILDE",
+  "CLOCK",
+  "WROTE",
+  "RETCH",
+  "PERCH",
+  "ROUGE",
+  "RADIO",
+  "SURER",
+  "FINER",
+  "VODKA",
+  "HERON",
+  "CHILL",
+  "GAUDY",
+  "PITHY",
+  "SMART",
+  "BADLY",
+  "ROGUE",
+  "GROUP",
+  "FIXER",
+  "GROIN",
+  "DUCHY",
+  "COAST",
+  "BLURT",
+  "PULPY",
+  "ALTAR",
+  "GREAT",
+  "BRIAR",
+  "CLICK",
+  "GOUGE",
+  "WORLD",
+  "ERODE",
+  "BOOZY",
+  "DOZEN",
+  "FLING",
+  "GROWL",
+  "ABYSS",
+  "STEED",
+  "ENEMA",
+  "JAUNT",
+  "COMET",
+  "TWEED",
+  "PILOT",
+  "DUTCH",
+  "BELCH",
+  "OUGHT",
+  "DOWRY",
+  "THUMB",
+  "HYPER",
+  "HATCH",
+  "ALONE",
+  "MOTOR",
+  "ABACK",
+  "GUILD",
+  "KEBAB",
+  "SPEND",
+  "FJORD",
+  "ESSAY",
+  "SPRAY",
+  "SPICY",
+  "AGATE",
+  "SALAD",
+  "BASIC",
+  "MOULT",
+  "CORNY",
+  "FORGE",
+  "CIVIC",
+  "ISLET",
+  "LABOR",
+  "GAMMA",
+  "LYING",
+  "AUDIT",
+  "ROUND",
+  "LOOPY",
+  "LUSTY",
+  "GOLEM",
+  "GONER",
+  "GREET",
+  "START",
+  "LAPEL",
+  "BIOME",
+  "PARRY",
+  "SHRUB",
+  "FRONT",
+  "WOOER",
+  "TOTEM",
+  "FLICK",
+  "DELTA",
+  "BLEED",
+  "ARGUE",
+  "SWIRL",
+  "ERROR",
+  "AGREE",
+  "OFFAL",
+  "FLUME",
+  "CRASS",
+  "PANEL",
+  "STOUT",
+  "BRIBE",
+  "DRAIN",
+  "YEARN",
+  "PRINT",
+  "SEEDY",
+  "IVORY",
+  "BELLY",
+  "STAND",
+  "FIRST",
+  "FORTH",
+  "BOOBY",
+  "FLESH",
+  "UNMET",
+  "LINEN",
+  "MAXIM",
+  "POUND",
+  "MIMIC",
+  "SPIKE",
+  "CLUCK",
+  "CRATE",
+  "DIGIT",
+  "REPAY",
+  "SOWER",
+  "CRAZY",
+  "ADOBE",
+  "OUTDO",
+  "TRAWL",
+  "WHELP",
+  "UNFED",
+  "PAPER",
+  "STAFF",
+  "CROAK",
+  "HELIX",
+  "FLOSS",
+  "PRIDE",
+  "BATTY",
+  "REACT",
+  "MARRY",
+  "ABASE",
+  "COLON",
+  "STOOL",
+  "CRUST",
+  "FRESH",
+  "DEATH",
+  "MAJOR",
+  "FEIGN",
+  "ABATE",
+  "BENCH",
+  "QUIET",
+  "GRADE",
+  "STINK",
+  "KARMA",
+  "MODEL",
+  "DWARF",
+  "HEATH",
+  "SERVE",
+  "NAVAL",
+  "EVADE",
+  "FOCAL",
+  "BLUSH",
+  "AWAKE",
+  "HUMPH",
+  "SISSY",
+  "REBUT",
+  "CIGAR",
+];
 
 const App = () => {
   const [word, setWord] = useState("");
@@ -8,66 +349,72 @@ const App = () => {
   const [currentGuess, setCurrentGuess] = useState("");
   const [error, setError] = useState("");
   const [isGameOver, setIsGameOver] = useState(false);
+  const [won, setWon] = useState(false);
+  const [loose, setLoose] = useState(false);
 
   useEffect(() => {
-    const wordList = VALID_WORDS;
-    const randomIndex = Math.floor(Math.random() * wordList.length);
-    const selectedWord = wordList[randomIndex];
-    setWord(selectedWord);
+    generateNewWord();
   }, []);
 
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (isGameOver) return;
+  const generateNewWord = () => {
+    const randomIndex = Math.floor(Math.random() * VALID_WORDS.length);
+    setWord(VALID_WORDS[randomIndex]);
+    setWon(false);
+    setLoose(false);
+  };
 
-      if (e.key === "Enter") {
-        if (currentGuess.length !== 5) {
-          setError("Guess must be 5 letters long");
-          return;
-        }
+  const handleKeyDown = (e) => {
+    if (isGameOver) return;
 
-        // if (!VALID_WORDS.includes(currentGuess.toLowerCase())) {
-        //   setError("Invalid word");
-        //   return;
-        // }
+    if (e.key === "Enter") {
+      if (currentGuess.length !== 5) {
+        setError("Guess must be 5 letters long");
+        return;
+      }
 
+      const emptyIndex = guesses.findIndex((guess) => guess == null);
+      if (emptyIndex !== -1) {
         const newGuesses = [...guesses];
-        newGuesses[guesses.findIndex((guess) => guess == null)] = currentGuess;
+        newGuesses[emptyIndex] = currentGuess;
         setGuesses(newGuesses);
         setCurrentGuess("");
 
         const isCorrect = word.toLowerCase() === currentGuess.toLowerCase();
         if (isCorrect) {
           setIsGameOver(true);
+          setWon(true);
           setError("You won!");
           return;
         }
 
-        // Add the guess to the array if there's space
-        const emptyIndex = guesses.findIndex((guess) => guess == null);
-        if (emptyIndex !== -1) {
-          setGuesses((prevGuesses) =>
-            prevGuesses.map((guess, index) =>
-              index === emptyIndex ? currentGuess.toUpperCase() : guess,
-            ),
-          );
-          setCurrentGuess("");
-          setError(""); // Clear error after a valid guess
-        } else {
-          setError("No more guesses left.");
+        if (emptyIndex === 5) {
+          setIsGameOver(true);
+          setLoose(true);
+          setError("You failed!");
+          return;
         }
-      } else if (/^[a-zA-Z]$/.test(e.key)) {
-        if (currentGuess.length < 5) {
-          setCurrentGuess((guess) => guess + e.key.toUpperCase());
-        }
-      } else if (e.key === "Backspace") {
-        setCurrentGuess((guess) => guess.slice(0, -1));
       }
-    };
+    } else if (/^[a-zA-Z]$/.test(e.key)) {
+      if (currentGuess.length < 5) {
+        setCurrentGuess((guess) => guess + e.key.toUpperCase());
+      }
+    } else if (e.key === "Backspace") {
+      setCurrentGuess((guess) => guess.slice(0, -1));
+    }
+  };
 
+  useEffect(() => {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [currentGuess, guesses, isGameOver, word]);
+
+  const resetGame = () => {
+    setGuesses(Array(6).fill(null));
+    setCurrentGuess("");
+    setError("");
+    setIsGameOver(false);
+    generateNewWord();
+  };
 
   return (
     <div className="flex h-screen w-full flex-col items-center justify-center gap-1 bg-red-50">
@@ -77,16 +424,41 @@ const App = () => {
         return (
           <div key={index}>
             <Line
-              guess={isCurrentGuess ? currentGuess : (guess ?? "")}
+              guess={isCurrentGuess ? currentGuess : guess || ""}
               isFinal={!isCurrentGuess && guess != null}
               word={word}
             />
           </div>
         );
       })}
-      <p>{word}</p>
-      <p>{error}</p>
-      <Keyboard word={word} guessedWords={guesses} />
+      <div className="mt-2 flex flex-col items-center gap-2">
+        <p className="flex items-center gap-2">
+          <span className="text-gray-500">Word: {word}</span>{" "}
+          <button
+            className="rounded-md border border-black px-3 py-1"
+            onClick={resetGame}
+          >
+            Reset
+          </button>
+        </p>
+        <p className={`${won && "text-green-500"} ${loose && "text-red-500"}`}>
+          <span className={``}>{error}</span>{" "}
+          {isGameOver && (
+            <button
+              onClick={resetGame}
+              className={`${won && "border-green-500"} ${loose && "border-red-500"} rounded-md border border-black px-3 py-1`}
+            >
+              New Game
+            </button>
+          )}
+        </p>
+      </div>
+      <Keyboard
+        word={word}
+        guessedWords={guesses}
+        currentGuess={currentGuess}
+        setCurrentGuess={setCurrentGuess}
+      />
     </div>
   );
 };
@@ -119,7 +491,7 @@ const Line = ({ guess, isFinal, word }) => {
   return <div className="flex gap-1">{tiles}</div>;
 };
 
-const Keyboard = ({ word, guessedWords }) => {
+const Keyboard = ({ word, guessedWords, currentGuess, setCurrentGuess }) => {
   const keyStatus = {};
 
   // Loop through all guessed words to determine the status of each key
@@ -141,9 +513,20 @@ const Keyboard = ({ word, guessedWords }) => {
     }
   });
 
+  const handleKeyClick = (key) => {
+    if (key === "Enter") {
+      // Simulate the Enter key press
+      const enterEvent = new KeyboardEvent("keydown", { key: "Enter" });
+      window.dispatchEvent(enterEvent);
+    } else if (currentGuess.length < 5) {
+      setCurrentGuess((prev) => prev + key);
+    }
+  };
+
   const renderKey = (key) => (
     <div
       key={key}
+      onClick={() => handleKeyClick(key)}
       className={`mx-1 cursor-pointer rounded-md border border-black px-4 py-2 font-semibold text-black shadow-sm ${keyStatus[key] || ""}`}
     >
       {key}
@@ -151,7 +534,7 @@ const Keyboard = ({ word, guessedWords }) => {
   );
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex scale-75 flex-col items-center justify-center md:scale-90 lg:scale-100">
       <div className="rounded-lg p-4">
         {/* First Row */}
         <div className="mb-2 flex">
@@ -165,9 +548,21 @@ const Keyboard = ({ word, guessedWords }) => {
         </div>
 
         {/* Third Row */}
-        <div className="mb-2 flex">
-          <div className="w-20"></div> {/* Offset for the first key */}
-          {["Z", "X", "C", "V", "B", "N", "M"].map(renderKey)}
+        <div className="flex">
+          <div className="mb-2 flex">
+            <div className="w-20"></div> {/* Offset for the first key */}
+            {["Z", "X", "C", "V", "B", "N", "M"].map(renderKey)}
+          </div>
+
+          {/* Fourth Row for Enter Key */}
+          <div className="">
+            <div
+              onClick={() => handleKeyClick("Enter")}
+              className="mx-1 cursor-pointer rounded-md border border-black bg-green-400 px-4 py-2 font-semibold text-black shadow-sm"
+            >
+              Enter
+            </div>
+          </div>
         </div>
       </div>
     </div>
